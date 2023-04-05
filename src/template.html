@@ -29,8 +29,6 @@
 			<button class="btn border border-gray-500 mt-10 w-full" id = "book-submit">Submit</button>
 		</div>
 		</form>
-
-			
 	</dialog>
 	<dialog id="book-details">
 		
@@ -40,7 +38,20 @@
 	</nav>
 	<div class="grid md:grid-cols-6">
 		<div class = "bg-white md:min-h-screen shadow md:order-0"></div>
-		<div class="mt-6 p-10 flex-col space-y-2 md:col-span-5 ">
+		<div class = "col-span-5 p-8">
+			<div class="mt-20 p-4 md:flex items-center md:space-x-10 space-y-4">
+				<h1 class = "text-6xl font-semibold">Library</h1>
+				<button class = "btn border rounded bg-cyan-500 text-white shadow" id = "add-book">
+					Add Book
+					<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="inline w-6 align-middle">
+					<path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
+					</svg>
+				</button>
+			</div>
+			<div id="book-container" class = "mt-6 flex-row space-y-2">
+			</div>
+		</div>
+		<!-- <div>
 			<div class="mt-10 p-4 md:flex items-center md:space-x-10">
 				<h1 class="text-6xl font-bold my-5">Library</h1>
 				<button class = "btn bg-blue-300 shadow" id = "add-book">
@@ -50,14 +61,16 @@
 				</svg>
 				</button>
 			</div>
-			<div class="book-item">
-				<div>Book Title</div>
-				<div>Book Description</div>
-				<div>Page Count</div>
-				<div>Status</div>
-				<button class="btn rounded border border-cyan-200">Details</button>
-			</div>	
-		</div>
+			<div class="mt-6 p-10 flex-col space-y-2 md:col-span-5 ">
+				<div class="book-item">
+					<div>Book Title</div>
+					<div>Book Description</div>
+					<div>Page Count</div>
+					<div>Status</div>
+					<button class="btn rounded border border-cyan-200">Details</button>
+				</div>	
+			</div>
+		</div> -->
 	</div>
 </body>
 </html>

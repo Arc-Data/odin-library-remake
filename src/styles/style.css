@@ -1,3 +1,25 @@
+@import url('https://fonts.googleapis.com/css2?family=Raleway:wght@100;200;300;400;500;600;700;800;900&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.book-item {
+	@apply bg-white rounded text-black p-4 flex justify-between items-center shadow; 
+}
+
+.btn {
+	@apply rounded py-3 px-4 text-lg font-medium uppercase tracking-wider;
+}
+
+.form-container {
+	@apply flex flex-col space-y-2 h-full; 
+}
+
+.form-row { 
+	@apply flex flex-col space-y-1;
+}
+
+.input-field {
+	@apply py-2 px-3 border border-gray-300 rounded
+}

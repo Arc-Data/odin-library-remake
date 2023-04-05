@@ -6,27 +6,27 @@
 	<title>Library Remake with Tailwind and TypeScript</title>
 </head>
 <body class = "bg-gray-100 font-body">
-	<dialog id = "book-dialog" class = "rounded shadow w-1/4 p-8">
+	<dialog id = "book-dialog" class = "rounded shadow p-8">
 		<p class = "text-2xl my-6 text-center font-semibold">Add Book Information</p>
 		<form method = "POST" id = "book-form">
 		<div class = "form-container">
 			<div class="form-row">
 				<label>Book Title</label>
-				<input type="text" name="book-title" class = "input-field">
-			</div>
+				<input type="text" name="book-title" class = "input-field" required>
+			</div> 
 
 			<div class="form-row">
 				<label>Book Author</label>
-				<input type="text" name="book-title" class = "input-field">
+				<input type="text" name="book-title" class = "input-field" required>
 			</div>
 
 			<div class="form-row">
 				<label>Page Count</label>
-				<input type="number" name="book-title" class = "input-field">
+				<input type="number" name="book-title" class = "input-field" required>
 			</div>
 		</div>
 		<div class = "text-center">
-			<button class="btn border border-gray-500 mt-10 w-full">Submit</button>
+			<button class="btn border border-gray-500 mt-10 w-full" id = "book-submit">Submit</button>
 		</div>
 		</form>
 

@@ -21,5 +21,5 @@
 }
 
 .input-field {
-	@apply py-2 px-3 border border-gray-300 rounded
+	@apply py-2 px-3 w-96 border border-gray-300 rounded;
 }

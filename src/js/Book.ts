@@ -23,6 +23,11 @@ export const BookModule = (() => {
 		}
 	}
 
+	const changeStatus = (idx: number, status: Status) => {
+		books[idx].status = status;
+		saveState();
+	}
+
 	const addBook = (title: string, author: string, pageCount: number, status: Status) => {
 		const book = Book(title, author, pageCount, status);
 		books.push(book);
@@ -46,5 +51,6 @@ export const BookModule = (() => {
 		addBook,
 		getBooks,
 		getBook,
+		changeStatus,
 	}
 })();

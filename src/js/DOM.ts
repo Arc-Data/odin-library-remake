@@ -10,6 +10,10 @@ export const DOM = (() => {
 	const bookContainer: HTMLDivElement = document.querySelector('#book-container')!;
 	const bookDetailDialog: HTMLDialogElement = document.querySelector('#book-detail-dialog')!;
 	const closeButtons = [...document.querySelectorAll('.close-btn')];
+	const changeStatus = document.querySelector('#changeStatus')!;
+	const changeStatusBtn = document.querySelector('#save-book')!;
+
+	let activeBookIdx = -1;
 
 	const init = () => {
 		BookModule.init();
@@ -36,6 +40,7 @@ export const DOM = (() => {
 	}
 
 	const openBookDetails = (idx: number) => {
+		activeBookIdx = idx;
 		const book = BookModule.getBook(idx);
 		const title = bookDetailDialog.querySelector('#book-title')!;
 		title.textContent = book.title;
@@ -105,6 +110,18 @@ export const DOM = (() => {
 	const openDialog = (dialog: HTMLDialogElement) => {
 		dialog.showModal();
 	}
+
+	const changeBookStatus = (e: Event) => {
+		e.preventDefault();
+		console.log("Change book status in DOM");
+
+		const status: HTMLSelectElement = document.querySelector('#status')!;
+		BookModule.changeStatus(activeBookIdx, status.value as Status);
+		bookDetailDialog.close();
+		renderBooks();
+	}
+
+	changeStatusBtn.addEventListener('click', changeBookStatus);
 
 	closeButtons.forEach(button => {
 		button.addEventListener('click', () => {

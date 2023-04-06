@@ -62,6 +62,7 @@ export const DOM = (() => {
 
 			let title = document.createElement('p');
 			title.textContent = book.title;
+			title.classList.add('col-span-2');
 			div.appendChild(title);
 
 			let author = document.createElement('p');

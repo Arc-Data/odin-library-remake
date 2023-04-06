@@ -40,9 +40,14 @@ export const BookModule = (() => {
 		return books;
 	}
 
+	const getBook = (idx: number) => {
+		return books[idx];
+	}
+
 	return {
 		init,
 		addBook,
 		getBooks,
+		getBook,
 	}
 })();

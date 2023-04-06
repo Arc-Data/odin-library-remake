@@ -2,11 +2,14 @@ import { BookType } from "../interfaces/BookType";
  import { BookModule } from "./Book";
 
 export const DOM = (() => {
+	
 	const addBookButton: HTMLButtonElement = document.querySelector('#add-book')!;
 	const bookDialog: HTMLDialogElement = document.querySelector('#book-dialog')!;
 	const bookForm: HTMLFormElement = document.querySelector('#book-form')!;
 	const bookSubmit: HTMLButtonElement = document.querySelector('#book-submit')!;
 	const bookContainer: HTMLDivElement = document.querySelector('#book-container')!;
+	const bookDetailDialog: HTMLDialogElement = document.querySelector('#book-detail-dialog')!;
+	const closeButtons = [...document.querySelectorAll('.close-btn')];
 
 	const init = () => {
 		BookModule.init();
@@ -32,11 +35,16 @@ export const DOM = (() => {
 		}
 	}
 
+	const openBookDetails = (idx: number) => {
+		const book = BookModule.getBook(idx);
+		bookDetailDialog.showModal();
+	}
+
 	const renderBooks = () => {
 		resetContainer(bookContainer);
 		const books: BookType[] = BookModule.getBooks();
 
-		books.forEach(book => {
+		books.forEach((book, idx) => {
 			let div = document.createElement('div');
 			div.classList.add('book-item');
 
@@ -56,20 +64,36 @@ export const DOM = (() => {
 			status.textContent = book.hasRead ? "Finished" : "Unfinished";
 			div.appendChild(status);
 
-			let details = document.createElement('button');
+			let details: HTMLButtonElement = document.createElement('button');
 			details.classList.add('btn', 'rounded', 'border', 'border-cyan-200');			
 			details.textContent = 'Details';
+			details.dataset.data = `${idx}`;
+
+			details.addEventListener('click', () => openBookDetails(idx));
+
+
 			div.appendChild(details);
 
 			bookContainer.appendChild(div);
 		})
 	}
 
-	bookDialog.addEventListener('click', (e: Event) => {
-		if(e.target === bookDialog) {
-			bookDialog.close();
+	const closeDialog = (e: Event, dialog: HTMLDialogElement) => {
+		if(e.target === dialog) {
+			dialog.close();
 		}
-	});
+	}
+
+	const openDialog = (dialog: HTMLDialogElement) => {
+		dialog.showModal();
+	}
+
+	closeButtons.forEach(button => {
+		button.addEventListener('click', () => {
+			button.closest('dialog')!.close();
+		})
+	})
+
 
 	bookSubmit.addEventListener('click', (e: Event) => {
 		e.preventDefault();
@@ -89,9 +113,7 @@ export const DOM = (() => {
 
 	})
 
-	addBookButton.addEventListener('click', () => {
-		bookDialog.showModal();
-	});
+	addBookButton.addEventListener('click', () => openDialog(bookDialog));
 
 	return {
 		init,

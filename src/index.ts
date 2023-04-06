@@ -15,7 +15,22 @@ const DOM = (() => {
 	const bookSubmit: HTMLButtonElement = document.querySelector('#book-submit')!;
 	const bookContainer: HTMLDivElement = document.querySelector('#book-container')!;
 
-	const books : BookType[] = [];
+	let books : BookType[];
+	
+	const init = () => {
+		const parseBooks = localStorage.getItem('books');
+		
+		if(typeof parseBooks === 'string') {
+			console.log("Does this");
+			books = JSON.parse(localStorage.getItem('books')!);
+			console.log(books);
+		} else {
+			console.log("Set to empty array");
+			books = [];
+		}
+
+		renderBooks();
+ 	}
 
 	const bookDialogClose = () => {
 		bookDialog.close();
@@ -30,6 +45,10 @@ const DOM = (() => {
 		return valid;
 	}
 
+	const saveBooks = () => {
+		localStorage.setItem("books", JSON.stringify(books));
+	}
+
 	const resetContainer = (div: HTMLElement) => {
 		while(div.firstChild) {
 			div.removeChild(div.lastChild!);
@@ -38,7 +57,7 @@ const DOM = (() => {
 
 	const renderBooks = () => {
 		resetContainer(bookContainer);
-		
+
 		books.forEach(book => {
 			let div = document.createElement('div');
 			div.classList.add('book-item');
@@ -76,17 +95,25 @@ const DOM = (() => {
 
 	bookSubmit.addEventListener('click', (e: Event) => {
 		e.preventDefault();
+		const inputs = bookForm.querySelectorAll('input');
+		
 		if(checkInputs()) {
-			const inputs = bookForm.querySelectorAll('input');
 			const title = inputs[0].value;
 			const author = inputs[1].value;
 			const pageCount = inputs[2].valueAsNumber;
 
 			const book: BookType = Book(title, author, pageCount);
 			books.push(book);
+			saveBooks();
 			renderBooks();
+			
+			inputs.forEach(input => input.value = "");
+			bookDialog.close();
 		}
+
 	})
+
+	init();
 
 	addBookButton.addEventListener('click', () => {
 		bookDialog.showModal();

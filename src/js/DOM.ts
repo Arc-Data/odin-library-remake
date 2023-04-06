@@ -49,6 +49,10 @@ export const DOM = (() => {
 		const pageCount = document.createElement('p');
 		pageCount.textContent = `Page Count: ${book.pageCount}`;
 
+		const status = document.createElement('p');
+		status.textContent = `Status: ${book.status}`;
+
+		content.append(author, pageCount, status);
 		bookDetailDialog.showModal();
 	}
 

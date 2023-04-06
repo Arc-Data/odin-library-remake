@@ -12,6 +12,8 @@ export const DOM = (() => {
 	const closeButtons = [...document.querySelectorAll('.close-btn')];
 	const changeStatus = document.querySelector('#changeStatus')!;
 	const changeStatusBtn = document.querySelector('#save-book')!;
+	const bookOptions = document.querySelector('#book-options')!;
+	const bookOptionsBtn = document.querySelector('#book-options-btn')!;
 
 	let activeBookIdx = -1;
 
@@ -129,6 +131,9 @@ export const DOM = (() => {
 		})
 	})
 
+	bookOptionsBtn.addEventListener('click', (e: Event) => {
+		bookOptions.classList.toggle('invisible');
+	})
 
 	bookSubmit.addEventListener('click', (e: Event) => {
 		e.preventDefault();
@@ -139,7 +144,6 @@ export const DOM = (() => {
 			const author = inputs[1].value;
 			const pageCount = inputs[2].valueAsNumber;
 			const status = bookForm.querySelector('select')!.value as Status;
-
 
 			BookModule.addBook(title, author, pageCount, status);
 			renderBooks();

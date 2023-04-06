@@ -15,6 +15,7 @@ export const DOM = (() => {
 	const bookOptions = document.querySelector('#book-options')!;
 	const bookOptionsBtn = document.querySelector('#book-options-btn')!;
 	const bookDeleteBtn = document.querySelector('#delete-book')!;
+	const statusSelect = document.querySelector('#status')!;
 
 	let activeBookIdx = -1;
 
@@ -46,6 +47,7 @@ export const DOM = (() => {
 		activeBookIdx = idx;
 		const book = BookModule.getBook(idx);
 		const title = bookDetailDialog.querySelector('#book-title')!;
+		const statusOptions = statusSelect.querySelectorAll('option')!;
 		title.textContent = book.title;
 
 		const content: HTMLDivElement = bookDetailDialog.querySelector('#book-details')!;
@@ -59,6 +61,12 @@ export const DOM = (() => {
 
 		const status = document.createElement('p');
 		status.textContent = `Status: ${book.status}`;
+
+		statusOptions.forEach(option => {
+			if(option.value === book.status) {
+				option.selected = true;
+			}
+		})
 
 		content.append(author, pageCount, status);
 		bookDetailDialog.showModal();

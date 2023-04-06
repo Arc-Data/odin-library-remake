@@ -37,6 +37,22 @@ export const DOM = (() => {
 
 	const openBookDetails = (idx: number) => {
 		const book = BookModule.getBook(idx);
+		const title = bookDetailDialog.querySelector('#book-title')!;
+		title.textContent = book.title;
+
+		const content: HTMLDivElement = bookDetailDialog.querySelector('#book-details')!;
+		resetContainer(content);
+
+		const author = document.createElement('p');
+		author.textContent = `Author: ${book.author}`;
+
+		const pageCount = document.createElement('p');
+		pageCount.textContent = `Page Count: ${book.pageCount}`;
+
+		const status = document.createElement('p');
+		status.textContent = `Status: ${book.hasRead ? "Completed" : "Unfinished"}`;
+
+		content.append(author, pageCount, status);
 		bookDetailDialog.showModal();
 	}
 

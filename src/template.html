@@ -30,10 +30,46 @@
 		</div>
 		</form>
 	</dialog>
-	<dialog id="book-detail-dialog">
-		<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6 close-btn">
-  		<path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
-		</svg>
+	<dialog id="book-detail-dialog" class = "p-0 rounded-md shadow">
+		<div class="bg-blue-950 relative text-white w-screen max-w-6xl h-60">
+			<div class="flex space-x-2 absolute right-0 p-4">
+				<div class = "relative rounded-full p-2 group hover:bg-cyan-500 hover:bg-opacity-50">
+					<span>
+						<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-10">
+							  <path stroke-linecap="round" stroke-linejoin="round" d="M6.75 12a.75.75 0 11-1.5 0 .75.75 0 011.5 0zM12.75 12a.75.75 0 11-1.5 0 .75.75 0 011.5 0zM18.75 12a.75.75 0 11-1.5 0 .75.75 0 011.5 0z" />
+						</svg>
+					</span>
+					<div class="absolute -right-4 w-40 py-4 px-8 flex-col rounded shadow  pointer-events-none invisible group-hover:pointer-events-auto bg-slate-950 text-white group-hover:visible first:border first:border-b-2 border-cyan-900">
+						<button class = "btn" id = "edit-book">Edit</button>
+						<button class = "btn" id = "delete-book">Delete</button>
+					</div>
+				</div>
+				<button class  ="close-btn rounded-full p-2 hover:bg-cyan-500 hover:bg-opacity-50">
+					<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-10 close-btn">
+			  		<path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+					</svg>
+				</button>
+			</div>
+			<p class = "absolute bottom-0 text-white p-12 text-4xl" id = "book-title">
+				
+			</p>
+		</div>
+
+		<div class="p-12 text-xl grid grid-cols-3" id = "">
+			<div class="col-span-2" id = "book-details">
+			</div>
+			<div class = "border-l-2 px-3">
+				<form method = "POST">
+				
+					<select name = "status" class = "p-4 w-full border border-slate-300">
+						<option value = "c">Complete</option>
+						<option value = "r">Reading</option>
+						<option value = "p">Planning</option>
+					</select>
+					<button class = "btn bg-cyan-500 rounded mt-20 w-full text-white" id = "save-book">Save</button>
+				</form>
+			</div>
+		</div>
 	</dialog>
 	<nav class = "bg-cyan-900 text-white p-6 border-b border-cyan-700 fixed top-0 w-full">
 		<p class = "text-3xl font-semibold text-white">ArcData</p>

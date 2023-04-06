@@ -14,6 +14,7 @@ export const DOM = (() => {
 	const changeStatusBtn = document.querySelector('#save-book')!;
 	const bookOptions = document.querySelector('#book-options')!;
 	const bookOptionsBtn = document.querySelector('#book-options-btn')!;
+	const bookDeleteBtn = document.querySelector('#delete-book')!;
 
 	let activeBookIdx = -1;
 
@@ -113,6 +114,13 @@ export const DOM = (() => {
 		dialog.showModal();
 	}
 
+	const deleteBook = () => {
+		BookModule.deleteBook(activeBookIdx);
+		bookOptions.classList.toggle('invisible');
+		bookDetailDialog.close();
+		renderBooks();
+	}
+
 	const changeBookStatus = (e: Event) => {
 		e.preventDefault();
 		console.log("Change book status in DOM");
@@ -122,6 +130,8 @@ export const DOM = (() => {
 		bookDetailDialog.close();
 		renderBooks();
 	}
+
+	bookDeleteBtn.addEventListener('click', deleteBook);
 
 	changeStatusBtn.addEventListener('click', changeBookStatus);
 

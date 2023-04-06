@@ -34,6 +34,11 @@ export const BookModule = (() => {
 		saveState();
 	}
 
+	const deleteBook = (idx: number) => {
+		books.splice(idx, 1);
+		saveState();
+	}
+
 	const saveState = () => {
 		localStorage.setItem("books", JSON.stringify(books));
 	}
@@ -52,5 +57,6 @@ export const BookModule = (() => {
 		getBooks,
 		getBook,
 		changeStatus,
+		deleteBook,
 	}
 })();

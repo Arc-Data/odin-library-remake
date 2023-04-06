@@ -1,5 +1,5 @@
-import { BookType } from "../interfaces/BookType";
- import { BookModule } from "./Book";
+import { BookType, Status } from "../interfaces/BookType";
+import { BookModule } from "./Book";
 
 export const DOM = (() => {
 	
@@ -49,10 +49,6 @@ export const DOM = (() => {
 		const pageCount = document.createElement('p');
 		pageCount.textContent = `Page Count: ${book.pageCount}`;
 
-		const status = document.createElement('p');
-		status.textContent = `Status: ${book.hasRead ? "Completed" : "Unfinished"}`;
-
-		content.append(author, pageCount, status);
 		bookDetailDialog.showModal();
 	}
 
@@ -77,13 +73,14 @@ export const DOM = (() => {
 			div.appendChild(pageCount);
 
 			let status = document.createElement('p');
-			status.textContent = book.hasRead ? "Finished" : "Unfinished";
+			status.textContent = book.status;
 			div.appendChild(status);
 
 			let details: HTMLButtonElement = document.createElement('button');
 			details.classList.add('btn', 'rounded', 'border', 'border-cyan-200');			
 			details.textContent = 'Details';
 			details.dataset.data = `${idx}`;
+
 
 			details.addEventListener('click', () => openBookDetails(idx));
 
@@ -119,8 +116,10 @@ export const DOM = (() => {
 			const title = inputs[0].value;
 			const author = inputs[1].value;
 			const pageCount = inputs[2].valueAsNumber;
+			const status = bookForm.querySelector('select')!.value as Status;
 
-			BookModule.addBook(title, author, pageCount);
+
+			BookModule.addBook(title, author, pageCount, status);
 			renderBooks();
 			
 			inputs.forEach(input => input.value = "");

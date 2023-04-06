@@ -1,11 +1,11 @@
-import { BookType } from "../interfaces/BookType"
+import { BookType, Status } from "../interfaces/BookType"
 
-const Book = (title: string, author: string, pageCount: number, hasRead: boolean = false) => {
+const Book = (title: string, author: string, pageCount: number, status: Status = "Planning") => {
 	return {
 		title,
 		author,
 		pageCount,
-		hasRead,
+		status,
 	}
 }
 
@@ -17,19 +17,16 @@ export const BookModule = (() => {
 		const parseBooks = localStorage.getItem('books');
 
 		if(typeof parseBooks === 'string') {
-			console.log("Parsing existing data");
 			books = JSON.parse(localStorage.getItem('books')!);
 		} else {
-			console.log("Creating new data");
 			books = [];
 		}
 	}
 
-	const addBook = (title: string, author: string, pageCount: number) => {
-		const book = Book(title, author, pageCount);
+	const addBook = (title: string, author: string, pageCount: number, status: Status) => {
+		const book = Book(title, author, pageCount, status);
 		books.push(book);
 		saveState();
-		console.log(books);
 	}
 
 	const saveState = () => {

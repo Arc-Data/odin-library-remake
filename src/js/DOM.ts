@@ -15,7 +15,9 @@ export const DOM = (() => {
 	const bookOptions = document.querySelector('#book-options')!;
 	const bookOptionsBtn = document.querySelector('#book-options-btn')!;
 	const bookDeleteBtn = document.querySelector('#delete-book')!;
+	const bookEditBtn = document.querySelector('#edit-book')!;
 	const statusSelect = document.querySelector('#status')!;
+
 
 	let activeBookIdx = -1;
 
@@ -102,9 +104,7 @@ export const DOM = (() => {
 			details.textContent = 'Details';
 			details.dataset.data = `${idx}`;
 
-
 			details.addEventListener('click', () => openBookDetails(idx));
-
 
 			div.appendChild(details);
 
@@ -118,8 +118,21 @@ export const DOM = (() => {
 		}
 	}
 
-	const openDialog = (dialog: HTMLDialogElement) => {
+	const openDialog = (dialog: HTMLDialogElement, idx?: number) => {
 		dialog.showModal();
+		const title: HTMLInputElement = bookForm.querySelector('#book-title')!;
+		const author: HTMLInputElement = bookForm.querySelector('#book-author')!;
+		const pageCount: HTMLInputElement = bookForm.querySelector('#book-page-count')!;
+
+		if(typeof idx === 'number') {
+			const book: BookType = BookModule.getBook(idx);
+			console.log(book);
+
+			title.value = book.title;
+			author.value = book.author;
+			pageCount.value = String(book.pageCount);
+		}
+
 	}
 
 	const deleteBook = () => {
@@ -171,6 +184,15 @@ export const DOM = (() => {
 		}
 
 	})
+
+	bookDialog.addEventListener('click', (e: Event) => closeDialog(e, bookDialog));
+
+	bookDetailDialog.addEventListener('click', (e: Event) => closeDialog(e, bookDetailDialog));
+
+	bookEditBtn.addEventListener('click', () => {
+		bookOptions.classList.toggle('invisible');
+		openDialog(bookDialog, activeBookIdx);
+	});
 
 	addBookButton.addEventListener('click', () => openDialog(bookDialog));
 

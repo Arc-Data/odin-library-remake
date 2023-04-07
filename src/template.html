@@ -6,23 +6,24 @@
 	<title>Library Remake with Tailwind and TypeScript</title>
 </head>
 <body class = "bg-gray-100 font-body">
-	<dialog id = "book-dialog" class = "rounded shadow p-8">
+	<dialog id = "book-dialog" class = "rounded shadow p-0">	
+		<div class = "p-8">
 		<p class = "text-2xl my-6 text-center font-semibold">Add Book Information</p>
 		<form method = "POST" id = "book-form">
 		<div class = "form-container">
 			<div class="form-row">
 				<label>Book Title</label>
-				<input type="text" name="book-title" class = "input-field" required>
+				<input type="text" name="book-title" class = "input-field" required id = "book-title">
 			</div> 
 
 			<div class="form-row">
 				<label>Book Author</label>
-				<input type="text" name="book-title" class = "input-field" required>
+				<input type="text" name="book-author" class = "input-field" id = "book-author" required>
 			</div>
 
 			<div class="form-row">
 				<label>Page Count</label>
-				<input type="number" name="book-title" class = "input-field" required>
+				<input type="number" name="book-page-count" class = "input-field" id = "book-page-count" required>
 			</div>
 
 			<div class="form-row">
@@ -34,12 +35,12 @@
 					<option value = "Complete">Complete</option>
 				</select>
 			</div>
-
 		</div>
 		<div class = "text-center">
 			<button class="btn border border-gray-500 mt-10 w-full" id = "book-submit">Submit</button>
 		</div>
 		</form>
+		</div>
 	</dialog>
 	<dialog id="book-detail-dialog" class = "p-0 rounded-md shadow select-none">
 		<div class="bg-blue-950 relative text-white w-screen max-w-6xl h-60">

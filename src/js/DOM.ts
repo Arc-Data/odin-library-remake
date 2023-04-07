@@ -124,6 +124,10 @@ export const DOM = (() => {
 		const author: HTMLInputElement = bookForm.querySelector('#book-author')!;
 		const pageCount: HTMLInputElement = bookForm.querySelector('#book-page-count')!;
 
+		title.value = '';
+		author.value = '';
+		pageCount.value = '';
+
 		if(typeof idx === 'number') {
 			const book: BookType = BookModule.getBook(idx);
 			console.log(book);
@@ -131,6 +135,8 @@ export const DOM = (() => {
 			title.value = book.title;
 			author.value = book.author;
 			pageCount.value = String(book.pageCount);
+		} else {
+			activeBookIdx = -1;
 		}
 
 	}
@@ -148,6 +154,8 @@ export const DOM = (() => {
 
 		const status: HTMLSelectElement = document.querySelector('#status')!;
 		BookModule.changeStatus(activeBookIdx, status.value as Status);
+		
+		activeBookIdx = -1;
 		bookDetailDialog.close();
 		renderBooks();
 	}
@@ -160,6 +168,7 @@ export const DOM = (() => {
 		button.addEventListener('click', () => {
 			button.closest('dialog')!.close();
 		})
+		activeBookIdx = -1;
 	})
 
 	bookOptionsBtn.addEventListener('click', (e: Event) => {
@@ -176,10 +185,18 @@ export const DOM = (() => {
 			const pageCount = inputs[2].valueAsNumber;
 			const status = bookForm.querySelector('select')!.value as Status;
 
-			BookModule.addBook(title, author, pageCount, status);
+			if(activeBookIdx === -1) {
+				console.log("Will add");
+				BookModule.addBook(title, author, pageCount, status);
+			} else {
+				console.log("will edit");
+				BookModule.editBook(activeBookIdx, {title, author, pageCount, status} as BookType);
+			}
+
 			renderBooks();
 			
 			inputs.forEach(input => input.value = "");
+			
 			bookDialog.close();
 		}
 
@@ -187,10 +204,13 @@ export const DOM = (() => {
 
 	bookDialog.addEventListener('click', (e: Event) => closeDialog(e, bookDialog));
 
-	bookDetailDialog.addEventListener('click', (e: Event) => closeDialog(e, bookDetailDialog));
+	bookDetailDialog.addEventListener('click', (e: Event) => {
+		closeDialog(e, bookDetailDialog)
+	});
 
 	bookEditBtn.addEventListener('click', () => {
 		bookOptions.classList.toggle('invisible');
+		bookDetailDialog.close();
 		openDialog(bookDialog, activeBookIdx);
 	});
 

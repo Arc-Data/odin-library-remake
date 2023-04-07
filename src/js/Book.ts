@@ -47,6 +47,16 @@ export const BookModule = (() => {
 		return books;
 	}
 
+	const editBook = (idx: number, bookDetails: BookType) => {
+		const book = books[idx];
+
+		book.title = bookDetails.title;
+		book.author = bookDetails.author;
+		book.pageCount = bookDetails.pageCount;
+		book.status = bookDetails.status;
+		saveState();
+	}
+
 	const getBook = (idx: number) => {
 		return books[idx];
 	}
@@ -55,6 +65,7 @@ export const BookModule = (() => {
 		init,
 		addBook,
 		getBooks,
+		editBook,
 		getBook,
 		changeStatus,
 		deleteBook,
